@@ -1,11 +1,11 @@
-import { test, Page, Browser, expect, Locator } from '@playwright/test';
+import { Page } from '@playwright/test';
 import accionesConstantes from '../../utils/accionesContantes';
 
 
-export default class pagePaginaProductos {
+export default class PagePaginaProductos {
 
     private readonly page: Page
-    private acciones: accionesConstantes
+    readonly acciones: accionesConstantes
     private expectDescription
     private expectPrice
     private expectName
@@ -14,9 +14,7 @@ export default class pagePaginaProductos {
     constructor(page:Page){
             this.page = page;
             this.acciones = new accionesConstantes(page);
-            this.expectDescription
-            this.expectPrice
-            this.expectName
+           
     }
 
     async  listaDeProductos(){
@@ -28,7 +26,7 @@ export default class pagePaginaProductos {
 
     //await randomItem.locator(`.inventory_item_name`).click({force: true})
         this.expectName =  await randomItem.locator(".inventory_item_name").textContent();
-        this.expectDescription = await randomItem.locator('.inventory_item_desc').textContent()
+        this.expectDescription = await randomItem.locator('.inventory_item_desc').textContent();
         this.expectPrice = await randomItem.locator('.inventory_item_price').textContent();
         
         await this.acciones.screenshot()

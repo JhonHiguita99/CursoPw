@@ -1,11 +1,11 @@
-import { test,Page,Browser, expect } from '@playwright/test';
+import { test,Page } from '@playwright/test';
 
 
 /*
 Author: Jhon Higuita
 */
 
-export default class accionesConstantes{
+export default class AccionesConstantes{
     private readonly page:Page;
 
     constructor(page:Page){
@@ -13,7 +13,7 @@ export default class accionesConstantes{
     
     };
 
-    async iniciarBrowser(testInfo:{attach: Function}, URL: String) {
+    async iniciarBrowser(testInfo:{attach: Function}, URL: string) {
         this.page.goto('');
         
     }

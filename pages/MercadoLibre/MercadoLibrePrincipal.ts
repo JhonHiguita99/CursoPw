@@ -1,10 +1,12 @@
-import { test, Page, Browser, expect, Locator } from '@playwright/test';
+import {  Page,  expect } from '@playwright/test';
 import accionesConstantes from '../../utils/accionesContantes';
 import selectorsPaginaPrincipalMercadoLibre from '../../selectors/MercadoLibreLocators/paginaPrincipalMercadoLibre';
+import { console } from 'inspector';
 
 export default class MercadoLibrePagePrincipal {
     private readonly page: Page
-    private acciones: accionesConstantes
+    readonly acciones: accionesConstantes
+    private Nombre
 
      constructor(page:Page){
         this.page = page;
@@ -19,14 +21,22 @@ export default class MercadoLibrePagePrincipal {
         }
 
         async obtenerelTituloDeLosProductosBuscados() {
+            //await this.page.waitForSelector('body'); 
+            await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
 
-            const titles = await this.page.locator(`//*[@id="root-app"]/div/div[3]/section/ol/li/div//div/div[2]/h2`).allInnerTexts();
+            const containerTitles = await this.page.locator(`.ui-search-result__wrapper`).all();
+            const randomIndex =  Math.floor(Math.random() * containerTitles.length);
 
-            console.log(titles.length)
-            for (let title of titles) {
-                console.log({title})
-                
-            }
+            const randomItem = containerTitles[randomIndex]
+
+           
+
+            this.Nombre = await randomItem.locator(`.poly-component__title-wrapper`).textContent();
+
+            console.log(this.Nombre)
+
+
+            return this.Nombre
         }
 
 

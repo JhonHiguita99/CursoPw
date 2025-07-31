@@ -1,9 +1,10 @@
-import { test, Page, Browser, expect } from '@playwright/test';
+import { test, Page, Browser } from '@playwright/test';
 import pageSaucesLogin from '../pages/Sauces/pageSaucesLogin';
 import pagePaginaProductos from '../pages/Sauces/pagePaginaProductos';
-import selectorsPaginaProductos from '../selectors/selectorsPaginaProductos';
 import pageCarrito from '../pages/Sauces/pageCarrito';
-import { SrvRecord } from 'dns';
+import LeerExcel from '../utils/LeerExcel';
+
+
 
 
 (async()=>{
@@ -13,18 +14,26 @@ import { SrvRecord } from 'dns';
     let loginSauces: pageSaucesLogin
     let productos: pagePaginaProductos
     let carrito: pageCarrito
+    let lectoraDatos: LeerExcel
 
     test.beforeEach(async ({ page }) => {
         loginSauces = new pageSaucesLogin(page)
-        productos = new pagePaginaProductos(page)
+        
         carrito = new pageCarrito(page)
+        lectoraDatos = new LeerExcel(page)
     })
 
 
     test('Validar la Compra del carrito de compras', async ({ page }) => {
          await test.step('Realizar Login Exitoso', async () => {
             await page.goto("https://www.saucedemo.com");
-            await loginSauces.ingresarDatosAlLogin("standard_user","secret_sauce");    
+            const datos = await lectoraDatos.leerDatosExcel('Datos Login');
+            for (const fila of datos) {
+                console.log(`Usuario: ${fila.usuario}, Contraseña: ${fila.contraseña}`);
+                await loginSauces.ingresarDatosAlLogin(fila.usuario, fila.contraseña);    
+
+                }
+   
         });
         
         await test.step('Validar Que se selecciona una Producto Random', async () => {
@@ -50,6 +59,7 @@ import { SrvRecord } from 'dns';
                capital: await row.locator(`xpath=.//td[3]`).innerText(),
                moneda: await row.locator(`xpath=.//td[4]`).innerText(),
                primerLenguaje: await row.locator(`xpath=.//td[5]`).innerText()
+              
 
 
               
@@ -65,6 +75,8 @@ import { SrvRecord } from 'dns';
 
 
         /*
+
+        ()
         for(let country of countries){
             console.log(country)
         }

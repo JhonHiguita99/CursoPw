@@ -1,10 +1,11 @@
-import { test, Page, Browser, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import selectorsLoginSauces from '../../selectors/selectorsLoginSauces';
 import accionesConstantes from '../../utils/accionesContantes';
 
-export default class pageSaucesLogin{
+export default class PageSaucesLogin{
+
     private readonly page: Page
-    private acciones: accionesConstantes
+    readonly acciones: accionesConstantes
 
     constructor(page:Page){
         this.page = page;
