@@ -12,7 +12,7 @@ export default class {
 
             
 async leerDatosExcel( hoja: string) {
-    const  rutaArchivo = 'C:/Users/jhonh/Documents/Proyecto Automatización/CursoYoutube/Datos.xlsx';
+    const  rutaArchivo = 'C:/Users/tr3sa/OneDrive/Documentos/Proyecto Automatización/CursoYoutube/utils/data/Datos.xlsx';
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(rutaArchivo);
     const worksheet = workbook.getWorksheet(hoja);

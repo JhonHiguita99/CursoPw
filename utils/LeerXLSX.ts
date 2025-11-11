@@ -13,7 +13,7 @@ export default class {
     async leerCelda(hoja: string, celda: string): Promise<string> {
         return new Promise((resolve, reject) => {
             try {
-                const workbook = XLSX.readFile('C:/Users/jhonh/Documents/Proyecto Automatización/CursoYoutube/Datos.xlsx');
+                const workbook = XLSX.readFile('C:/Users/tr3sa/OneDrive/Documentos/Proyecto Automatización/CursoYoutube/utils/data/Datos.xlsx');
                 const sheet = workbook.Sheets[hoja];
    
                 const cell = sheet[celda];
