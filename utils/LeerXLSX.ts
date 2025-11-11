@@ -14,6 +14,7 @@ export default class {
         return new Promise((resolve, reject) => {
             try {
                 const workbook = XLSX.readFile('C:/Users/tr3sa/OneDrive/Documentos/Proyecto Automatización/CursoYoutube/utils/data/Datos.xlsx');
+                
                 const sheet = workbook.Sheets[hoja];
    
                 const cell = sheet[celda];
